@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HiFamilyDailiesView">
+        <attr name="header" format="boolean" />
+        <attr name="header_color" format="color" />
+        <attr name="dailies_color" format="color" />
+        <attr name="header_text_size" format="dimension" />
+        <attr name="dailies_text_size" format="dimension" />
+    </declare-styleable>
+</resources>
