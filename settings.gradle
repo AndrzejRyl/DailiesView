@@ -1,0 +1,2 @@
+include ':hifamily-dailies-view'
+project(':hifamily-dailies-view').projectDir = new File('lib')
