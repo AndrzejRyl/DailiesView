@@ -1,11 +1,14 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.dailies
 
 import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.hide
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.show
 
 class DailiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -36,6 +39,16 @@ class DailiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             dailiesColor: Int,
             dailiesTextSize: Float) {
 
-        //todo
+        when (shouldShowHeader) {
+            true -> {
+                headerTextView.show()
+                headerTextView.setTextColor(headerColor)
+                headerTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, headerTextSize)
+            }
+            else -> headerTextView.hide()
+        }
+
+        dailyTextView.setTextColor(dailiesColor)
+        dailyTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, dailiesTextSize)
     }
 }

@@ -15,17 +15,23 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
+    companion object {
+        const val UNSET_TEXT_SIZE = -1f
+    }
+
     @BindView(R.id.dailies_pager)
     lateinit var dailiesViewPager: DailiesViewPager
 
     @JvmField
-    @BindDimen(R.dimen.header_text_size)
-    var headerTextSize: Float = -1f
+    @BindDimen(R.dimen.dailies_header_text_size)
+    var defaultHeaderTextSize: Float = UNSET_TEXT_SIZE
 
     @JvmField
     @BindDimen(R.dimen.dailies_text_size)
-    var dailiesTextSize: Float = -1f
+    var defaultDailiesTextSize: Float = UNSET_TEXT_SIZE
 
+    private var headerTextSize = defaultHeaderTextSize
+    private var dailiesTextSize = defaultDailiesTextSize
     private var shouldShowHeader: Boolean = true
     private var headerColor = getColor(R.color.default_text_color)
     private var dailiesColor = getColor(R.color.default_text_color)
@@ -54,6 +60,9 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     override fun onFinishInflate() {
         super.onFinishInflate()
         ButterKnife.bind(this)
+
+        headerTextSize = if (headerTextSize == UNSET_TEXT_SIZE) defaultHeaderTextSize else headerTextSize
+        dailiesTextSize = if (dailiesTextSize == UNSET_TEXT_SIZE) defaultDailiesTextSize else dailiesTextSize
     }
 
     fun init(currentIndex: Int, availableDailies: Map<String, String>) {

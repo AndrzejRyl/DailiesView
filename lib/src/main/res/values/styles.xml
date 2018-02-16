@@ -16,11 +16,15 @@
     <style name="DailiesHeader" parent="Wrap">
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/dailies_header_top_margin</item>
     </style>
 
     <style name="DailiesDaily" parent="Wrap">
-        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_gravity">top|center_horizontal</item>
         <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/dailies_text_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/dailies_text_vertical_padding</item>
+        <item name="android:paddingStart">@dimen/dailies_text_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/dailies_text_horizontal_padding</item>
     </style>
-
 </resources>
