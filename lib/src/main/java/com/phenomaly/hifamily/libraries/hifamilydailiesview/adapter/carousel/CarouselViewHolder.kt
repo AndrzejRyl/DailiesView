@@ -17,6 +17,17 @@ class CarouselViewHolder(val itemView: View) {
             itemView.alpha = value
         }
 
+    var translationY: Float = itemView.translationY
+        set(value) {
+            itemView.translationY = value
+        }
+
+    val left: Int by lazy { itemView.left }
+
+    val x: Float by lazy { itemView.x }
+
+    val width: Int by lazy { itemView.width }
+
     init {
         ButterKnife.bind(this, itemView)
     }
@@ -24,26 +35,4 @@ class CarouselViewHolder(val itemView: View) {
     fun setItemImage(drawable: Drawable) {
         iconImageView.setImageDrawable(drawable)
     }
-
-    var translationY: Float
-        set(value) {
-            itemView.translationY = value
-        }
-        get() = itemView.translationY
-
-    var left: Int
-        set(value) {
-            itemView.left = value
-        }
-        get() = itemView.left
-
-    var x: Float
-        set(value) {
-            itemView.x = value
-        }
-        get() = itemView.x
-
-    var width: Int
-        set(value) {}
-        get() = itemView.width
 }
