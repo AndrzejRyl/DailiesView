@@ -4,6 +4,23 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollView
+        android:id="@+id/carousel_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="40dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/carousel_scrollview_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal" />
+    </com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollView>
+
     <com.phenomaly.hifamily.libraries.hifamilydailiesview.view.DailiesViewPager
         android:id="@+id/dailies_pager"
         android:layout_width="match_parent"

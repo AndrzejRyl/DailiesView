@@ -1,13 +1,16 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.view
 
 import android.content.Context
+import android.graphics.Point
 import android.util.AttributeSet
 import android.util.Log
+import android.view.WindowManager
 import android.widget.LinearLayout
 import butterknife.BindDimen
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel.CarouselAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.dailies.DailiesAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.getColor
 
@@ -18,6 +21,9 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     companion object {
         const val UNSET_TEXT_SIZE = -1f
     }
+
+    @BindView(R.id.carousel_scrollview)
+    lateinit var carouselScrollView: CarouselScrollView
 
     @BindView(R.id.dailies_pager)
     lateinit var dailiesViewPager: DailiesViewPager
@@ -38,6 +44,9 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     private lateinit var dailiesAdapter: DailiesAdapter
     private lateinit var dailiesPageListener: OnPageSelectedListener
+
+    private lateinit var carouselAdapter: CarouselAdapter
+    private lateinit var carouselOnScrolledListener: OnScrolledListener
 
     init {
         inflate(context, R.layout.view_hi_family_dailies, this)
@@ -67,6 +76,8 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     fun init(currentIndex: Int, availableDailies: Map<String, String>) {
         initDailiesAdapter(availableDailies)
+        initCarouselAdapter(availableDailies.size)
+        initCarouselRecyclerPadding()
 
         dailiesViewPager.setCurrentItem(currentIndex, true)
     }
@@ -85,5 +96,26 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         dailiesViewPager.adapter = dailiesAdapter
         dailiesPageListener = { Log.i(javaClass.name, "Selected position no ${it}!") }
         dailiesViewPager.addCustomOnPageSelectedListener(dailiesPageListener)
+    }
+
+    private fun initCarouselRecyclerPadding() {
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val width = size.x
+        carouselScrollView.setPaddingRelative(width / 2, 0, width / 2, 0)
+    }
+
+    private fun initCarouselAdapter(dailiesCount: Int) {
+        carouselAdapter = CarouselAdapter(dailiesCount)
+
+        carouselAdapter.context = context
+        carouselScrollView.adapter = carouselAdapter
+        carouselOnScrolledListener = {
+            dailiesViewPager
+                    .setCurrentItem(it, false)
+        }
+        carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
     }
 }
