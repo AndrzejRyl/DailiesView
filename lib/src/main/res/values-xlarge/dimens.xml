@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dailies_header_text_size">28sp</dimen>
-    <dimen name="dailies_text_size">40sp</dimen>
-    <dimen name="dailies_header_top_margin">40dp</dimen>
-    <dimen name="dailies_text_vertical_padding">24dp</dimen>
-    <dimen name="dailies_text_horizontal_padding">90dp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_header_text_size">28sp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_text_size">40sp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_header_top_margin">40dp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_text_vertical_padding">24dp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_text_horizontal_padding">90dp</dimen>
 </resources>
