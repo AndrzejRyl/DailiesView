@@ -28,7 +28,7 @@ class CarouselAdapter(
         val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
 
-        points = (0..pointsCount)
+        points = (0 until pointsCount)
                 .map { inflate(context, R.layout.view_carousel_item, null) }
                 .map {
                     it.layoutParams = layoutParams
