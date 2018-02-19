@@ -16,7 +16,7 @@ internal fun View.show() {
     visibility = View.VISIBLE
 }
 
-fun Context.getScreenWidth(): Int {
+internal fun Context.getScreenWidth(): Int {
     val wm = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val display = wm.defaultDisplay
     val size = Point()

@@ -9,7 +9,8 @@ import com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollV
 
 class CarouselAdapter(
         private val pointsCount: Int,
-        private val carouselDrawable: Drawable) {
+        private val carouselDrawable: Drawable,
+        private val availableDailies: Int) {
 
     companion object {
         private const val DEFAULT_SCROLL_TRESHOLD = 20
@@ -47,8 +48,8 @@ class CarouselAdapter(
 
     fun onScrollChanged(screenCenter: Int) {
         // Stop at the end
-        if (screenCenter > points.last().x) {
-            scrollView.scrollTo(points.last().x.toInt(), scrollView.y.toInt())
+        if (screenCenter > points[availableDailies - 1].x) {
+            scrollView.scrollTo(points[availableDailies - 1].x.toInt(), scrollView.y.toInt())
             return
         }
 

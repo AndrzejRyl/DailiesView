@@ -78,9 +78,9 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         dailiesTextSize = if (dailiesTextSize == UNSET_TEXT_SIZE) defaultDailiesTextSize else dailiesTextSize
     }
 
-    fun init(currentIndex: Int, availableDailies: Map<String, String>) {
+    fun init(currentIndex: Int, allDailiesCount: Int, availableDailies: Map<String, String>) {
         initDailiesAdapter(availableDailies)
-        initCarouselAdapter(availableDailies.size)
+        initCarouselAdapter(allDailiesCount, availableDailies.size)
         initCarouselRecyclerPadding()
 
         dailiesViewPager.setCurrentItem(currentIndex, true)
@@ -110,13 +110,14 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         carouselScrollView.setPaddingRelative(width / 2, 0, width / 2, 0)
     }
 
-    private fun initCarouselAdapter(dailiesCount: Int) {
+    private fun initCarouselAdapter(allDailiesCount: Int, availableDailiesCount: Int) {
         if (carouselDrawable == null) {
             carouselDrawable = ContextCompat.getDrawable(context, R.drawable.default_carousel_icon)
         }
         carouselAdapter = CarouselAdapter(
-                dailiesCount,
-                carouselDrawable!!
+                allDailiesCount,
+                carouselDrawable!!,
+                availableDailiesCount
         )
 
         carouselAdapter.context = context
