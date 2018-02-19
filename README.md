@@ -7,6 +7,7 @@ The only thing you have to do is include HiFamilyDailiesView in your xml and ini
 `init(currentIndex: Int, allDailiesCount: Int, availableDailies: Map<String, String>)`
 
 Parameters for the method
+
 * currentIndex - this is the index of currently selected daily message
 * allDailiesCount - thie is the amount of all dailies available in Database
 * availableDailies - this is a map of dailies available for the user (user gets more dailies every day). This map maps headers (like date) to daily messages.
