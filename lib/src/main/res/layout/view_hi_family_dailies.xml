@@ -21,6 +21,11 @@
             android:orientation="horizontal" />
     </com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollView>
 
+    <RelativeLayout
+        android:id="@+id/hifamily_dailies_additional_view_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <com.phenomaly.hifamily.libraries.hifamilydailiesview.view.DailiesViewPager
         android:id="@+id/dailies_pager"
         android:layout_width="match_parent"
