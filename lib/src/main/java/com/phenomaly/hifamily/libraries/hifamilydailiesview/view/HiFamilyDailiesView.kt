@@ -30,18 +30,18 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     lateinit var dailiesViewPager: DailiesViewPager
 
     @JvmField
-    @BindDimen(R.dimen.dailies_header_text_size)
+    @BindDimen(R.dimen.hiFamilyDailiesView_dailies_header_text_size)
     var defaultHeaderTextSize: Float = UNSET_TEXT_SIZE
 
     @JvmField
-    @BindDimen(R.dimen.dailies_text_size)
+    @BindDimen(R.dimen.hiFamilyDailiesView_dailies_text_size)
     var defaultDailiesTextSize: Float = UNSET_TEXT_SIZE
 
     private var headerTextSize = defaultHeaderTextSize
     private var dailiesTextSize = defaultDailiesTextSize
     private var shouldShowHeader: Boolean = true
-    private var headerColor = getColor(R.color.default_text_color)
-    private var dailiesColor = getColor(R.color.default_text_color)
+    private var headerColor = getColor(R.color.hiFamilyDailiesView_default_text_color)
+    private var dailiesColor = getColor(R.color.hiFamilyDailiesView_default_text_color)
 
     private var carouselDrawable: Drawable? = null
 

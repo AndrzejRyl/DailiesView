@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/header"
-        style="@style/DailiesHeader"
+        style="@style/HiFamilyDailiesViewDailiesHeader"
         tools:text="FRIDAY, 24.03.2017" />
 
     <ScrollView
@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/daily"
-            style="@style/DailiesDaily"
+            style="@style/HiFamilyDailiesViewDailiesDaily"
             tools:text="Mommy! Don’t forget the folic acid! It’s very important for my development. You can buy it at any pharmacy, and make sure you consult your doctor about proper dosage." />
     </ScrollView>
 </LinearLayout>
