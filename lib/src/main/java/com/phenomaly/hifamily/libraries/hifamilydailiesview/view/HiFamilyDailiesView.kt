@@ -1,20 +1,19 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.view
 
 import android.content.Context
-import android.graphics.Point
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import android.util.Log
-import android.view.WindowManager
 import android.widget.LinearLayout
 import butterknife.BindDimen
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnTouch
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel.CarouselAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.dailies.DailiesAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.getColor
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.getScreenWidth
 
 class HiFamilyDailiesView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -99,16 +98,15 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
         dailiesAdapter.context = context
         dailiesViewPager.adapter = dailiesAdapter
-        dailiesPageListener = { Log.i(javaClass.name, "Selected position no ${it}!") }
+        dailiesPageListener = {
+            carouselScrollView
+                    .smoothScrollToPosition(it)
+        }
         dailiesViewPager.addCustomOnPageSelectedListener(dailiesPageListener)
     }
 
     private fun initCarouselRecyclerPadding() {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wm.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val width = size.x
+        val width = context.getScreenWidth()
         carouselScrollView.setPaddingRelative(width / 2, 0, width / 2, 0)
     }
 
@@ -128,5 +126,19 @@ class HiFamilyDailiesView @JvmOverloads constructor(
                     .setCurrentItem(it, false)
         }
         carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
+    }
+
+    @OnTouch(R.id.dailies_pager)
+    fun onDailiesTouched(): Boolean {
+        carouselScrollView.clearOnScrollListeners()
+        dailiesViewPager.addCustomOnPageSelectedListener(dailiesPageListener)
+        return false
+    }
+
+    @OnTouch(R.id.carousel_scrollview)
+    fun onCarouselTouched(): Boolean {
+        dailiesViewPager.clearCustomOnPageSelectedListeners()
+        carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
+        return false
     }
 }
