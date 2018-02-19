@@ -12,6 +12,11 @@ class CarouselViewHolder(val itemView: View) {
     @BindView(R.id.carousel_item_image_view)
     lateinit var iconImageView: ImageView
 
+    var alpha: Float = 1f
+        set(value) {
+            itemView.alpha = value
+        }
+
     init {
         ButterKnife.bind(this, itemView)
     }

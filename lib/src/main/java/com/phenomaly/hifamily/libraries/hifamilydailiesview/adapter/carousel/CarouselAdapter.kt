@@ -17,6 +17,10 @@ class CarouselAdapter(
         private const val UNITIALIZED_VIEW_HOLDER_WIDTH = -1
         private const val CENTER_TRANSLATION_CONST = 1f
         private const val BORDER_TRANSLATION_CONST = .3f
+
+        private const val CAROUSEL_CENTER_ITEM_ALPHA = 1f
+        private const val CAROUSEL_AVAILABLE_ITEM_ALPHA = .4f
+        private const val CAROUSEL_DISABLED_ITEM_ALPHA = .2f
     }
 
     lateinit var context: Context
@@ -35,14 +39,12 @@ class CarouselAdapter(
                     it.layoutParams = layoutParams
                     CarouselViewHolder(it)
                 }
-                .map {
-                    it.setItemImage(carouselDrawable)
-                    it
-                }
+                .onEach { it.setItemImage(carouselDrawable) }
                 .toList()
 
-        points.forEach {
-            scrollView.contentLayout.addView(it.itemView)
+        points.forEachIndexed { index, viewHolder ->
+            setupViewHolderAlpha(index)
+            scrollView.contentLayout.addView(viewHolder.itemView)
         }
     }
 
@@ -73,6 +75,7 @@ class CarouselAdapter(
         }
 
         centerView.translationY = getCenterTranslation(centerView.left, screenCenter)
+        centerView.alpha = CAROUSEL_CENTER_ITEM_ALPHA
 
         rightView?.let {
             it.translationY = getBorderTranslation(it.left, screenCenter)
@@ -80,12 +83,16 @@ class CarouselAdapter(
     }
 
     private fun resetSurroundingViews(centerIndex: Int) {
-        (centerIndex - DEFAULT_SCROLL_TRESHOLD..centerIndex + DEFAULT_SCROLL_TRESHOLD).forEach {
-            if (it >= 0 && it < points.size && Math.abs(it - centerIndex) > 1) {
-                points[it]
-                        .translationY = 0f
-            }
-        }
+        (centerIndex - DEFAULT_SCROLL_TRESHOLD..centerIndex + DEFAULT_SCROLL_TRESHOLD)
+                .filter { it in (0..points.size) }
+                .forEach {
+                    if (Math.abs(it - centerIndex) > 1) {
+                        points[it].translationY = 0f
+                    }
+                    if (it != centerIndex) {
+                        setupViewHolderAlpha(it)
+                    }
+                }
     }
 
     private fun getCenterIndex(center: Int): Int {
@@ -121,6 +128,13 @@ class CarouselAdapter(
     private fun initializeViewHolderWidth() {
         if (pointsCount > 0 && viewHolderWidth == UNITIALIZED_VIEW_HOLDER_WIDTH) {
             viewHolderWidth = points[0].width
+        }
+    }
+
+    private fun setupViewHolderAlpha(index: Int) {
+        when (index >= availableDailies) {
+            true -> points[index].alpha = CAROUSEL_DISABLED_ITEM_ALPHA
+            else -> points[index].alpha = CAROUSEL_AVAILABLE_ITEM_ALPHA
         }
     }
 }
