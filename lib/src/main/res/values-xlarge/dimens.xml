@@ -2,7 +2,10 @@
 <resources>
     <dimen name="hiFamilyDailiesView_dailies_header_text_size">28sp</dimen>
     <dimen name="hiFamilyDailiesView_dailies_text_size">40sp</dimen>
-    <dimen name="hiFamilyDailiesView_dailies_header_top_margin">40dp</dimen>
     <dimen name="hiFamilyDailiesView_dailies_text_vertical_padding">24dp</dimen>
     <dimen name="hiFamilyDailiesView_dailies_text_horizontal_padding">90dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_height">80dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_margin">30dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_item_padding">10dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_item_size">14dp</dimen>
 </resources>

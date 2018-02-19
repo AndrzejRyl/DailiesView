@@ -16,12 +16,11 @@
     <style name="HiFamilyDailiesViewDailiesHeader" parent="HiFamilyDailiesViewWrap">
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/hiFamilyDailiesView_dailies_header_top_margin</item>
     </style>
 
     <style name="HiFamilyDailiesViewDailiesDaily" parent="HiFamilyDailiesViewWrap">
         <item name="android:layout_gravity">top|center_horizontal</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">top|center_horizontal</item>
         <item name="android:paddingTop">@dimen/hiFamilyDailiesView_dailies_text_vertical_padding</item>
         <item name="android:paddingBottom">@dimen/hiFamilyDailiesView_dailies_text_vertical_padding</item>
         <item name="android:paddingStart">@dimen/hiFamilyDailiesView_dailies_text_horizontal_padding</item>
