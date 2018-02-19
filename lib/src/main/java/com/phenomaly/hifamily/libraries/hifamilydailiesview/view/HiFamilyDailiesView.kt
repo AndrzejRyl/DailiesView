@@ -82,8 +82,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         initDailiesAdapter(availableDailies)
         initCarouselAdapter(allDailiesCount, availableDailies.size)
         initCarouselRecyclerPadding()
-
-        dailiesViewPager.setCurrentItem(currentIndex, true)
+        initCarouselScrollViewPosition(currentIndex)
     }
 
     private fun initDailiesAdapter(availableDailies: Map<String, String>) {
@@ -102,7 +101,6 @@ class HiFamilyDailiesView @JvmOverloads constructor(
             carouselScrollView
                     .smoothScrollToPosition(it)
         }
-        dailiesViewPager.addCustomOnPageSelectedListener(dailiesPageListener)
     }
 
     private fun initCarouselRecyclerPadding() {
@@ -127,6 +125,15 @@ class HiFamilyDailiesView @JvmOverloads constructor(
                     .setCurrentItem(it, false)
         }
         carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
+    }
+
+    private fun initCarouselScrollViewPosition(currentIndex: Int) {
+        carouselScrollView.post {
+            when (currentIndex == 0) {
+                true -> carouselAdapter.onScrollChanged(carouselAdapter.getChildAt(0).left)
+                else -> carouselScrollView.smoothScrollToPosition(currentIndex)
+            }
+        }
     }
 
     @OnTouch(R.id.dailies_pager)
