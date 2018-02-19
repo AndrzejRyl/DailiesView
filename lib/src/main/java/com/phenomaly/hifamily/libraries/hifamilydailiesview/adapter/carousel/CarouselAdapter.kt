@@ -19,8 +19,8 @@ class CarouselAdapter(
         private const val BORDER_TRANSLATION_CONST = .3f
 
         private const val CAROUSEL_CENTER_ITEM_ALPHA = 1f
-        private const val CAROUSEL_AVAILABLE_ITEM_ALPHA = .4f
-        private const val CAROUSEL_DISABLED_ITEM_ALPHA = .2f
+        private const val CAROUSEL_AVAILABLE_ITEM_ALPHA = .5f
+        private const val CAROUSEL_DISABLED_ITEM_ALPHA = .15f
     }
 
     lateinit var context: Context
