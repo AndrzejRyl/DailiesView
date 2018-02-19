@@ -1,13 +1,15 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.View.inflate
 import android.widget.LinearLayout
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollView
 
 class CarouselAdapter(
-        private val pointsCount: Int) {
+        private val pointsCount: Int,
+        private val carouselDrawable: Drawable) {
 
     companion object {
         private const val DEFAULT_SCROLL_TRESHOLD = 20
@@ -31,6 +33,10 @@ class CarouselAdapter(
                 .map {
                     it.layoutParams = layoutParams
                     CarouselViewHolder(it)
+                }
+                .map {
+                    it.setItemImage(carouselDrawable)
+                    it
                 }
                 .toList()
 

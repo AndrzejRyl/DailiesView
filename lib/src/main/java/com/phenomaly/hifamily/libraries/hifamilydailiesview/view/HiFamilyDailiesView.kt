@@ -2,6 +2,8 @@ package com.phenomaly.hifamily.libraries.hifamilydailiesview.view
 
 import android.content.Context
 import android.graphics.Point
+import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.WindowManager
@@ -42,6 +44,8 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     private var headerColor = getColor(R.color.default_text_color)
     private var dailiesColor = getColor(R.color.default_text_color)
 
+    private var carouselDrawable: Drawable? = null
+
     private lateinit var dailiesAdapter: DailiesAdapter
     private lateinit var dailiesPageListener: OnPageSelectedListener
 
@@ -62,6 +66,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
             dailiesColor = getColor(R.styleable.HiFamilyDailiesView_dailies_color, dailiesColor)
             headerTextSize = getDimension(R.styleable.HiFamilyDailiesView_header_text_size, headerTextSize)
             dailiesTextSize = getDimension(R.styleable.HiFamilyDailiesView_dailies_text_size, dailiesTextSize)
+            carouselDrawable = getDrawable(R.styleable.HiFamilyDailiesView_carousel_drawable)
             recycle()
         }
     }
@@ -108,7 +113,13 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     }
 
     private fun initCarouselAdapter(dailiesCount: Int) {
-        carouselAdapter = CarouselAdapter(dailiesCount)
+        if (carouselDrawable == null) {
+            carouselDrawable = ContextCompat.getDrawable(context, R.drawable.default_carousel_icon)
+        }
+        carouselAdapter = CarouselAdapter(
+                dailiesCount,
+                carouselDrawable!!
+        )
 
         carouselAdapter.context = context
         carouselScrollView.adapter = carouselAdapter

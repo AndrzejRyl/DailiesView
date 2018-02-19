@@ -1,6 +1,6 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel
 
-import android.support.annotation.DrawableRes
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import butterknife.BindView
@@ -12,14 +12,12 @@ class CarouselViewHolder(val itemView: View) {
     @BindView(R.id.carousel_item_image_view)
     lateinit var iconImageView: ImageView
 
-    @DrawableRes
-    var drawableResourceId: Int = R.drawable.default_carousel_icon
-        set(value) {
-            iconImageView.setBackgroundResource(value)
-        }
-
     init {
         ButterKnife.bind(this, itemView)
+    }
+
+    fun setItemImage(drawable: Drawable) {
+        iconImageView.setImageDrawable(drawable)
     }
 
     var translationY: Float
