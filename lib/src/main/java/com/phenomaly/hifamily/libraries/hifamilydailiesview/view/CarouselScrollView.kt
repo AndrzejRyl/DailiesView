@@ -37,14 +37,6 @@ class CarouselScrollView @JvmOverloads constructor(
         adapter?.onScrollChanged(scrollX)
     }
 
-    // TODO Refactor
-    // 15 is probably the height of the view (2 x 7dp)
-    // 17 is the width of the view (14) + half of the margin (4)
-    // 51 is prbably 3 x 17
-    fun getCenterTranslation(leftBorder: Int, center: Int) = Math.min(0f, -15f * (17 - Math.abs(leftBorder - center)) / 17 - 15f)
-
-    fun getBorderTranslation(leftBorder: Int, center: Int) = Math.min(0f, -15f * (51 - Math.abs(leftBorder - center)) / 51)
-
     fun smoothScrollToPosition(position: Int) {
         val point = adapter?.getChildAt(position)
         point?.let {

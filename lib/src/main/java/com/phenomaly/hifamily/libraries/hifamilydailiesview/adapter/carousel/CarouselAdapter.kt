@@ -11,11 +11,16 @@ class CarouselAdapter(
 
     companion object {
         private const val DEFAULT_SCROLL_TRESHOLD = 20
+        private const val UNITIALIZED_VIEW_HOLDER_WIDTH = -1
+        private const val CENTER_TRANSLATION_CONST = 1f
+        private const val BORDER_TRANSLATION_CONST = .3f
     }
 
     lateinit var context: Context
     lateinit var scrollView: CarouselScrollView
     lateinit var points: List<CarouselViewHolder>
+
+    private var viewHolderWidth: Int = UNITIALIZED_VIEW_HOLDER_WIDTH
 
     fun onViewReady() {
         val layoutParams = LinearLayout.LayoutParams(
@@ -34,33 +39,36 @@ class CarouselAdapter(
         }
     }
 
-    fun onScrollChanged(center: Int) {
+    fun onScrollChanged(screenCenter: Int) {
         // Stop at the end
-        if (center > points.last().x) {
+        if (screenCenter > points.last().x) {
             scrollView.scrollTo(points.last().x.toInt(), scrollView.y.toInt())
             return
         }
 
-        val centerIndex = getCenterIndex(center)
+        val centerIndex = getCenterIndex(screenCenter)
         scrollView.onScrolled(centerIndex)
 
-        setupCenterViews(centerIndex, center)
+        initializeViewHolderWidth()
+        setupCenterViews(centerIndex, screenCenter)
         resetSurroundingViews(centerIndex)
     }
 
-    private fun setupCenterViews(centerIndex: Int, center: Int) {
+    fun getChildAt(position: Int): CarouselViewHolder = points[position]
+
+    private fun setupCenterViews(centerIndex: Int, screenCenter: Int) {
         val leftView = if (centerIndex > 0) points[centerIndex - 1] else null
         val centerView = points[centerIndex]
         val rightView = if (centerIndex < points.size - 2) points[centerIndex + 1] else null
 
         leftView?.let {
-            it.translationY = scrollView.getBorderTranslation(it.left, center)
+            it.translationY = getBorderTranslation(it.left, screenCenter)
         }
 
-        centerView.translationY = scrollView.getCenterTranslation(centerView.left, center)
+        centerView.translationY = getCenterTranslation(centerView.left, screenCenter)
 
         rightView?.let {
-            it.translationY = scrollView.getBorderTranslation(it.left, center)
+            it.translationY = getBorderTranslation(it.left, screenCenter)
         }
     }
 
@@ -80,5 +88,32 @@ class CarouselAdapter(
         return points.indexOf(viewInCenter)
     }
 
-    fun getChildAt(position: Int): CarouselViewHolder = points[position]
+    private fun getCenterTranslation(leftBorder: Int, screenCenter: Int): Float {
+        val maximumDistanceToCenter = viewHolderWidth / 2f
+        val currentDistanceToCenter = Math.abs(leftBorder - screenCenter)
+        val translationFactor = CENTER_TRANSLATION_CONST +
+                (maximumDistanceToCenter - currentDistanceToCenter) / maximumDistanceToCenter
+
+        return getTranslation(translationFactor)
+    }
+
+    private fun getBorderTranslation(leftBorder: Int, screenCenter: Int): Float {
+        val maximumDistanceToCenter = viewHolderWidth / 2f * 3
+        val currentDistanceToCenter = Math.abs(leftBorder - screenCenter)
+        val translationFactor = BORDER_TRANSLATION_CONST +
+                (maximumDistanceToCenter - currentDistanceToCenter) / maximumDistanceToCenter
+
+        return getTranslation(translationFactor)
+    }
+
+    private fun getTranslation(translationFactor: Float): Float {
+        val maxTranslation = -1 * viewHolderWidth / 2f
+        return Math.min(0f, maxTranslation * translationFactor)
+    }
+
+    private fun initializeViewHolderWidth() {
+        if (pointsCount > 0 && viewHolderWidth == UNITIALIZED_VIEW_HOLDER_WIDTH) {
+            viewHolderWidth = points[0].width
+        }
+    }
 }

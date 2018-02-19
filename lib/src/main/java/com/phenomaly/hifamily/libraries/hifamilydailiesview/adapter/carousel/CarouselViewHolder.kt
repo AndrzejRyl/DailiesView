@@ -39,4 +39,8 @@ class CarouselViewHolder(val itemView: View) {
             itemView.x = value
         }
         get() = itemView.x
+
+    var width: Int
+        set(value) {}
+        get() = itemView.width
 }
