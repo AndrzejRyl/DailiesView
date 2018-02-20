@@ -15,10 +15,6 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    companion object {
-        const val UNSET_TEXT_SIZE = -1f
-    }
-
     private lateinit var carouselScrollView: CarouselScrollView
     private lateinit var dailiesViewPager: DailiesViewPager
     private lateinit var additionalViewContainer: LinearLayout
