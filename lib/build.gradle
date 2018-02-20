@@ -1,6 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: "com.jfrog.artifactory"
+apply plugin: 'maven-publish'
 
+ext.VERSION_NAME = "1.0." + VERSION_CODE
 
 buildscript {
     repositories {
@@ -8,23 +11,51 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.12"
     }
 }
 
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.phenomaly.hifamily.libraries.hifamilydailiesview"
         minSdkVersion 18
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+artifactory {
+    contextUrl = ARTIFACTORY_URL
+    publish {
+        repository {
+            repoKey = ARTIFACTORY_REPO_KEY
+            username = ARTIFACTORY_USERNAME
+            password = ARTIFACTORY_PASSWORD
+        }
+        defaults {
+            publications('release')
+            publishArtifacts = true
+            publishPom = true
+            properties = ['q.os': 'android']
+        }
+    }
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
+            groupId 'ly.phenoma'
+            artifactId 'hifamily-dailies-view'
+            version VERSION_NAME
         }
     }
 }
