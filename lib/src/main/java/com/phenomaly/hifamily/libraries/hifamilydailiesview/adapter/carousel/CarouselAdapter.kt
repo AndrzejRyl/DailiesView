@@ -8,6 +8,7 @@ import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollView
 
 class CarouselAdapter(
+        private val context: Context,
         private val pointsCount: Int,
         private val carouselDrawable: Drawable,
         private val availableDailies: Int) {
@@ -23,7 +24,6 @@ class CarouselAdapter(
         private const val CAROUSEL_DISABLED_ITEM_ALPHA = .15f
     }
 
-    lateinit var context: Context
     lateinit var scrollView: CarouselScrollView
     lateinit var points: List<CarouselViewHolder>
 

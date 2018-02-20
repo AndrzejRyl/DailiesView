@@ -96,6 +96,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     private fun initDailiesAdapter(availableDailies: Map<String, String>) {
         dailiesAdapter = DailiesAdapter(
+                context,
                 availableDailies,
                 shouldShowHeader,
                 headerColor,
@@ -104,7 +105,6 @@ class HiFamilyDailiesView @JvmOverloads constructor(
                 dailiesTextSize
         )
 
-        dailiesAdapter.context = context
         dailiesViewPager.adapter = dailiesAdapter
         dailiesPageListener = {
             carouselScrollView
@@ -122,12 +122,12 @@ class HiFamilyDailiesView @JvmOverloads constructor(
             carouselDrawable = ContextCompat.getDrawable(context, R.drawable.default_carousel_icon)
         }
         carouselAdapter = CarouselAdapter(
+                context,
                 allDailiesCount,
                 carouselDrawable!!,
                 availableDailiesCount
         )
 
-        carouselAdapter.context = context
         carouselScrollView.adapter = carouselAdapter
         carouselOnScrolledListener = {
             dailiesViewPager

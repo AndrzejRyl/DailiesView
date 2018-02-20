@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 
 class DailiesAdapter(
+        private val context: Context,
         private val dailies: Map<String, String>,
         private val shouldShowHeader: Boolean,
         private val headerColor: Int,
@@ -17,11 +18,7 @@ class DailiesAdapter(
         private val dailiesTextSize: Float
 ) : PagerAdapter() {
 
-    lateinit var context: Context
-
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
-    }
+    override fun isViewFromObject(view: View, `object`: Any) = (view == `object`)
 
     override fun getCount(): Int = dailies.size
 
