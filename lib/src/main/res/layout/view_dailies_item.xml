@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/HiFamilyDailiesViewDailiesHeader"
+        tools:text="FRIDAY, 24.03.2017" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/daily"
+            style="@style/HiFamilyDailiesViewDailiesDaily"
+            tools:text="Mommy! Don’t forget the folic acid! It’s very important for my development. You can buy it at any pharmacy, and make sure you consult your doctor about proper dosage." />
+    </ScrollView>
+</LinearLayout>
