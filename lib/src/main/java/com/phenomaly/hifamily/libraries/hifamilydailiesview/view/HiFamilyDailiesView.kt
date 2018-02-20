@@ -32,7 +32,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     lateinit var dailiesViewPager: DailiesViewPager
 
     @BindView(R.id.hifamily_dailies_additional_view_container)
-    lateinit var additionalViewContainer: RelativeLayout
+    lateinit var additionalViewContainer: LinearLayout
 
     @JvmField
     @BindDimen(R.dimen.hiFamilyDailiesView_dailies_header_text_size)
@@ -92,6 +92,10 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     fun addAdditionalView(view: View) {
         additionalViewContainer.addView(view)
+    }
+
+    fun clearAdditionalViews() {
+        additionalViewContainer.removeAllViews()
     }
 
     private fun initDailiesAdapter(availableDailies: Map<String, String>) {
