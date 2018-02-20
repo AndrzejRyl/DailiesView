@@ -18,18 +18,18 @@ class DailiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     @BindView(R.id.daily)
     lateinit var dailyTextView: TextView
 
-    var header: String = ""
-        set(value) {
-            headerTextView.text = value
-        }
-
-    var daily: String? = ""
-        set(value) {
-            dailyTextView.text = value
-        }
-
     init {
         ButterKnife.bind(this, itemView)
+    }
+
+    fun setHeader(header: String) {
+        headerTextView.text = header
+    }
+
+    fun setDailyMessage(message: String?) {
+        message?.let {
+            dailyTextView.text = it
+        }
     }
 
     fun setupStyle(

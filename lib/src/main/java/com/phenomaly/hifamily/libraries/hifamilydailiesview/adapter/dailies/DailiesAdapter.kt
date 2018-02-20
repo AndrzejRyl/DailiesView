@@ -33,8 +33,8 @@ class DailiesAdapter(
         val header = dailies.keys.toTypedArray()[position]
         val daily = dailies[header]
 
-        holder.header = header
-        holder.daily = daily
+        holder.setHeader(header)
+        holder.setDailyMessage(daily)
 
         holder.setupStyle(
                 shouldShowHeader,
