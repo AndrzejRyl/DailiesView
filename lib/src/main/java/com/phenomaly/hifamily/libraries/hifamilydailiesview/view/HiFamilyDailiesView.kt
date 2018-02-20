@@ -113,12 +113,12 @@ class HiFamilyDailiesView @JvmOverloads constructor(
             carouselDrawable = ContextCompat.getDrawable(context, R.drawable.default_carousel_icon)
         }
         carouselAdapter = CarouselAdapter(
+                context,
                 allDailiesCount,
                 carouselDrawable!!,
                 availableDailiesCount
         )
 
-        carouselAdapter.context = context
         carouselScrollView.adapter = carouselAdapter
         carouselOnScrolledListener = {
             dailiesViewPager
