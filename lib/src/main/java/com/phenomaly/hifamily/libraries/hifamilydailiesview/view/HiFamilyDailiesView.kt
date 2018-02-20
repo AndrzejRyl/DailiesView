@@ -4,15 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import butterknife.BindDimen
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnTouch
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel.CarouselAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.dailies.DailiesAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.getColor
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.getDimension
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.getScreenWidth
 
 class HiFamilyDailiesView @JvmOverloads constructor(
@@ -23,26 +19,13 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         const val UNSET_TEXT_SIZE = -1f
     }
 
-    @BindView(R.id.carousel_scrollview)
-    lateinit var carouselScrollView: CarouselScrollView
+    private lateinit var carouselScrollView: CarouselScrollView
+    private lateinit var dailiesViewPager: DailiesViewPager
+    private lateinit var additionalViewContainer: LinearLayout
 
-    @BindView(R.id.dailies_pager)
-    lateinit var dailiesViewPager: DailiesViewPager
-
-    @BindView(R.id.hifamily_dailies_additional_view_container)
-    lateinit var additionalViewContainer: LinearLayout
-
-    @JvmField
-    @BindDimen(R.dimen.hiFamilyDailiesView_dailies_header_text_size)
-    var defaultHeaderTextSize: Float = UNSET_TEXT_SIZE
-
-    @JvmField
-    @BindDimen(R.dimen.hiFamilyDailiesView_dailies_text_size)
-    var defaultDailiesTextSize: Float = UNSET_TEXT_SIZE
-
-    private var headerTextSize = defaultHeaderTextSize
-    private var dailiesTextSize = defaultDailiesTextSize
     private var shouldShowHeader: Boolean = true
+    private var headerTextSize = getDimension(R.dimen.hiFamilyDailiesView_dailies_header_text_size)
+    private var dailiesTextSize = getDimension(R.dimen.hiFamilyDailiesView_dailies_text_size)
     private var headerColor = getColor(R.color.hiFamilyDailiesView_default_text_color)
     private var dailiesColor = getColor(R.color.hiFamilyDailiesView_default_text_color)
 
@@ -74,10 +57,13 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        ButterKnife.bind(this)
 
-        headerTextSize = if (headerTextSize == UNSET_TEXT_SIZE) defaultHeaderTextSize else headerTextSize
-        dailiesTextSize = if (dailiesTextSize == UNSET_TEXT_SIZE) defaultDailiesTextSize else dailiesTextSize
+        carouselScrollView = findViewById(R.id.carousel_scrollview)
+        dailiesViewPager = findViewById(R.id.dailies_pager)
+        additionalViewContainer = findViewById(R.id.hifamily_dailies_additional_view_container)
+
+        dailiesViewPager.setOnTouchListener { _, _ -> onDailiesTouched() }
+        carouselScrollView.setOnTouchListener { _, _ -> onCarouselTouched() }
     }
 
     fun init(currentIndex: Int, allDailiesCount: Int, availableDailies: Map<String, String>) {
@@ -140,15 +126,13 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         }
     }
 
-    @OnTouch(R.id.dailies_pager)
-    fun onDailiesTouched(): Boolean {
+    private fun onDailiesTouched(): Boolean {
         carouselScrollView.clearOnScrollListeners()
         dailiesViewPager.addCustomOnPageSelectedListener(dailiesPageListener)
         return false
     }
 
-    @OnTouch(R.id.carousel_scrollview)
-    fun onCarouselTouched(): Boolean {
+    private fun onCarouselTouched(): Boolean {
         dailiesViewPager.clearCustomOnPageSelectedListeners()
         carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
         return false

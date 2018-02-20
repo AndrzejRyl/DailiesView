@@ -2,24 +2,17 @@ package com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel
 
 import android.view.View
 import android.widget.ImageView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 
 class CarouselViewHolder(val itemView: View) {
 
-    @BindView(R.id.carousel_item_image_view)
-    lateinit var iconImageView: ImageView
+    private val iconImageView: ImageView = itemView.findViewById(R.id.carousel_item_image_view)
 
     val left: Int by lazy { itemView.left }
 
     val x: Float by lazy { itemView.x }
 
     val width: Int by lazy { itemView.width }
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
 
     fun setAlpha(alpha: Float) {
         itemView.alpha = alpha

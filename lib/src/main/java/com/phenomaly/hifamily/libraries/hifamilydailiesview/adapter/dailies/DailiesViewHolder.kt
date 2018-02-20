@@ -4,23 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.hide
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.show
 
 class DailiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    @BindView(R.id.header)
-    lateinit var headerTextView: TextView
-
-    @BindView(R.id.daily)
-    lateinit var dailyTextView: TextView
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
+    private val headerTextView: TextView = itemView.findViewById(R.id.header)
+    private val dailyTextView: TextView = itemView.findViewById(R.id.daily)
 
     fun setHeader(header: String) {
         headerTextView.text = header

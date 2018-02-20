@@ -5,9 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel.CarouselAdapter
 
 typealias OnScrolledListener = (Int) -> Unit
@@ -16,7 +13,6 @@ class CarouselScrollView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : HorizontalScrollView(context, attrs, defStyleAttr) {
 
-    @BindView(R.id.carousel_scrollview_content)
     lateinit var contentLayout: LinearLayout
 
     var adapter: CarouselAdapter? = null
@@ -30,7 +26,7 @@ class CarouselScrollView @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        ButterKnife.bind(this)
+        contentLayout = findViewById(com.phenomaly.hifamily.libraries.hifamilydailiesview.R.id.carousel_scrollview_content)
     }
 
     override fun onScrollChanged(scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
