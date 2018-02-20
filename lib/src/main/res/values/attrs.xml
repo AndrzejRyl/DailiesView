@@ -6,5 +6,6 @@
         <attr name="dailies_color" format="color" />
         <attr name="header_text_size" format="dimension" />
         <attr name="dailies_text_size" format="dimension" />
+        <attr name="carousel_drawable" format="reference" />
     </declare-styleable>
 </resources>
