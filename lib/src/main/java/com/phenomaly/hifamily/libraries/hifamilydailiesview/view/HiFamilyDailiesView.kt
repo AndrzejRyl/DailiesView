@@ -2,7 +2,9 @@ package com.phenomaly.hifamily.libraries.hifamilydailiesview.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import butterknife.BindDimen
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -26,6 +28,9 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     @BindView(R.id.dailies_pager)
     lateinit var dailiesViewPager: DailiesViewPager
+
+    @BindView(R.id.hifamily_dailies_additional_view_container)
+    lateinit var additionalViewContainer: LinearLayout
 
     @JvmField
     @BindDimen(R.dimen.hiFamilyDailiesView_dailies_header_text_size)
@@ -80,6 +85,14 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         initCarouselAdapter(allDailiesCount, availableDailies.size)
         initCarouselRecyclerPadding()
         initCarouselScrollViewPosition(currentIndex)
+    }
+
+    fun addAdditionalView(view: View) {
+        additionalViewContainer.addView(view)
+    }
+
+    fun clearAdditionalViews() {
+        additionalViewContainer.removeAllViews()
     }
 
     private fun initDailiesAdapter(availableDailies: Map<String, String>) {
