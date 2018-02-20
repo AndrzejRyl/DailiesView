@@ -1,8 +1,6 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.view
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import butterknife.BindDimen
@@ -43,8 +41,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     private var headerColor = getColor(R.color.hiFamilyDailiesView_default_text_color)
     private var dailiesColor = getColor(R.color.hiFamilyDailiesView_default_text_color)
 
-    private var carouselDrawable: Drawable? = null
-
+    private var carouselDrawableId: Int = R.drawable.default_carousel_icon
     private lateinit var dailiesAdapter: DailiesAdapter
     private lateinit var dailiesPageListener: OnPageSelectedListener
 
@@ -65,7 +62,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
             dailiesColor = getColor(R.styleable.HiFamilyDailiesView_dailies_color, dailiesColor)
             headerTextSize = getDimension(R.styleable.HiFamilyDailiesView_header_text_size, headerTextSize)
             dailiesTextSize = getDimension(R.styleable.HiFamilyDailiesView_dailies_text_size, dailiesTextSize)
-            carouselDrawable = getDrawable(R.styleable.HiFamilyDailiesView_carousel_drawable)
+            carouselDrawableId = getResourceId(R.styleable.HiFamilyDailiesView_carousel_drawable, carouselDrawableId)
             recycle()
         }
     }
@@ -109,21 +106,15 @@ class HiFamilyDailiesView @JvmOverloads constructor(
     }
 
     private fun initCarouselAdapter(allDailiesCount: Int, availableDailiesCount: Int) {
-        if (carouselDrawable == null) {
-            carouselDrawable = ContextCompat.getDrawable(context, R.drawable.default_carousel_icon)
-        }
         carouselAdapter = CarouselAdapter(
                 context,
                 allDailiesCount,
-                carouselDrawable!!,
+                carouselDrawableId,
                 availableDailiesCount
         )
 
         carouselScrollView.adapter = carouselAdapter
-        carouselOnScrolledListener = {
-            dailiesViewPager
-                    .setCurrentItem(it, false)
-        }
+        carouselOnScrolledListener = { dailiesViewPager.setCurrentItem(it, false) }
         carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
     }
 

@@ -1,7 +1,6 @@
 package com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.View.inflate
 import android.widget.LinearLayout
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
@@ -10,7 +9,7 @@ import com.phenomaly.hifamily.libraries.hifamilydailiesview.view.CarouselScrollV
 class CarouselAdapter(
         private val context: Context,
         private val pointsCount: Int,
-        private val carouselDrawable: Drawable,
+        private val carouselDrawableId: Int,
         private val availableDailies: Int) {
 
     companion object {
@@ -39,7 +38,7 @@ class CarouselAdapter(
                     it.layoutParams = layoutParams
                     CarouselViewHolder(it)
                 }
-                .onEach { it.setItemImage(carouselDrawable) }
+                .onEach { it.setItemImage(carouselDrawableId) }
                 .toList()
 
         points.forEachIndexed { index, viewHolder ->
@@ -71,14 +70,14 @@ class CarouselAdapter(
         val rightView = if (centerIndex < points.size - 2) points[centerIndex + 1] else null
 
         leftView?.let {
-            it.translationY = getBorderTranslation(it.left, screenCenter)
+            it.setTranslationY(getBorderTranslation(it.left, screenCenter))
         }
 
-        centerView.translationY = getCenterTranslation(centerView.left, screenCenter)
-        centerView.alpha = CAROUSEL_CENTER_ITEM_ALPHA
+        centerView.setTranslationY(getCenterTranslation(centerView.left, screenCenter))
+        centerView.setAlpha(CAROUSEL_CENTER_ITEM_ALPHA)
 
         rightView?.let {
-            it.translationY = getBorderTranslation(it.left, screenCenter)
+            it.setTranslationY(getBorderTranslation(it.left, screenCenter))
         }
     }
 
@@ -87,7 +86,7 @@ class CarouselAdapter(
                 .filter { it in (0..points.size) }
                 .forEach {
                     if (Math.abs(it - centerIndex) > 1) {
-                        points[it].translationY = 0f
+                        points[it].setTranslationY(0f)
                     }
                     if (it != centerIndex) {
                         setupViewHolderAlpha(it)
@@ -133,8 +132,8 @@ class CarouselAdapter(
 
     private fun setupViewHolderAlpha(index: Int) {
         when (index >= availableDailies) {
-            true -> points[index].alpha = CAROUSEL_DISABLED_ITEM_ALPHA
-            else -> points[index].alpha = CAROUSEL_AVAILABLE_ITEM_ALPHA
+            true -> points[index].setAlpha(CAROUSEL_DISABLED_ITEM_ALPHA)
+            else -> points[index].setAlpha(CAROUSEL_AVAILABLE_ITEM_ALPHA)
         }
     }
 }
