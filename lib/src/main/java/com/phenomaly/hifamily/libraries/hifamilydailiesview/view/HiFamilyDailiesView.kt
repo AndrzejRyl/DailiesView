@@ -87,6 +87,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
 
     private fun initDailiesAdapter(availableDailies: Map<String, String>) {
         dailiesAdapter = DailiesAdapter(
+                context,
                 availableDailies,
                 shouldShowHeader,
                 headerColor,
@@ -95,7 +96,6 @@ class HiFamilyDailiesView @JvmOverloads constructor(
                 dailiesTextSize
         )
 
-        dailiesAdapter.context = context
         dailiesViewPager.adapter = dailiesAdapter
         dailiesPageListener = {
             carouselScrollView
