@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hiFamilyDailiesView_dailies_header_text_size">12sp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_text_size">18sp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_text_vertical_padding">10dp</dimen>
+    <dimen name="hiFamilyDailiesView_dailies_text_horizontal_padding">40dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_height">36dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_margin">40dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_item_padding">4dp</dimen>
+    <dimen name="hifamilyDailiesView_carousel_item_size">6dp</dimen>
+</resources>

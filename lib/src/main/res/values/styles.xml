@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/hiFamilyDailiesView_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/hiFamilyDailiesView_colorPrimaryDark</item>
+        <item name="colorAccent">@color/hiFamilyDailiesView_colorAccent</item>
+    </style>
+
+    <style name="HiFamilyDailiesViewWrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="HiFamilyDailiesViewDailiesHeader" parent="HiFamilyDailiesViewWrap">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="HiFamilyDailiesViewDailiesDaily" parent="HiFamilyDailiesViewWrap">
+        <item name="android:layout_gravity">top|center_horizontal</item>
+        <item name="android:gravity">top|center_horizontal</item>
+        <item name="android:paddingTop">@dimen/hiFamilyDailiesView_dailies_text_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/hiFamilyDailiesView_dailies_text_vertical_padding</item>
+        <item name="android:paddingStart">@dimen/hiFamilyDailiesView_dailies_text_horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/hiFamilyDailiesView_dailies_text_horizontal_padding</item>
+    </style>
+</resources>
