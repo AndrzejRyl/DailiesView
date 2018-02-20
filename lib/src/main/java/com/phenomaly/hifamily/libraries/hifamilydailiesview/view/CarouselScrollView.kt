@@ -7,7 +7,7 @@ import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.R2
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel.CarouselAdapter
 
 typealias OnScrolledListener = (Int) -> Unit
@@ -16,7 +16,7 @@ class CarouselScrollView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : HorizontalScrollView(context, attrs, defStyleAttr) {
 
-    @BindView(R.id.carousel_scrollview_content)
+    @BindView(R2.id.carousel_scrollview_content)
     lateinit var contentLayout: LinearLayout
 
     var adapter: CarouselAdapter? = null

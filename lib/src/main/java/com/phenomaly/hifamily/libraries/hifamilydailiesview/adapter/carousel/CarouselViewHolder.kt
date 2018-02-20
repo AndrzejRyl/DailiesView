@@ -4,11 +4,11 @@ import android.view.View
 import android.widget.ImageView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.R2
 
 class CarouselViewHolder(val itemView: View) {
 
-    @BindView(R.id.carousel_item_image_view)
+    @BindView(R2.id.carousel_item_image_view)
     lateinit var iconImageView: ImageView
 
     val left: Int by lazy { itemView.left }

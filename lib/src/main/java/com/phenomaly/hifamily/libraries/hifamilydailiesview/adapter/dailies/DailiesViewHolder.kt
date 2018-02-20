@@ -6,16 +6,16 @@ import android.view.View
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.R2
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.hide
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.show
 
 class DailiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    @BindView(R.id.header)
+    @BindView(R2.id.header)
     lateinit var headerTextView: TextView
 
-    @BindView(R.id.daily)
+    @BindView(R2.id.daily)
     lateinit var dailyTextView: TextView
 
     init {

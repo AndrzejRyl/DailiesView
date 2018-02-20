@@ -4,12 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import butterknife.BindDimen
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnTouch
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.R
+import com.phenomaly.hifamily.libraries.hifamilydailiesview.R2
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.carousel.CarouselAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.adapter.dailies.DailiesAdapter
 import com.phenomaly.hifamily.libraries.hifamilydailiesview.getColor
@@ -23,21 +23,21 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         const val UNSET_TEXT_SIZE = -1f
     }
 
-    @BindView(R.id.carousel_scrollview)
+    @BindView(R2.id.carousel_scrollview)
     lateinit var carouselScrollView: CarouselScrollView
 
-    @BindView(R.id.dailies_pager)
+    @BindView(R2.id.dailies_pager)
     lateinit var dailiesViewPager: DailiesViewPager
 
-    @BindView(R.id.hifamily_dailies_additional_view_container)
+    @BindView(R2.id.hifamily_dailies_additional_view_container)
     lateinit var additionalViewContainer: LinearLayout
 
     @JvmField
-    @BindDimen(R.dimen.hiFamilyDailiesView_dailies_header_text_size)
+    @BindDimen(R2.dimen.hiFamilyDailiesView_dailies_header_text_size)
     var defaultHeaderTextSize: Float = UNSET_TEXT_SIZE
 
     @JvmField
-    @BindDimen(R.dimen.hiFamilyDailiesView_dailies_text_size)
+    @BindDimen(R2.dimen.hiFamilyDailiesView_dailies_text_size)
     var defaultDailiesTextSize: Float = UNSET_TEXT_SIZE
 
     private var headerTextSize = defaultHeaderTextSize
@@ -140,14 +140,14 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         }
     }
 
-    @OnTouch(R.id.dailies_pager)
+    @OnTouch(R2.id.dailies_pager)
     fun onDailiesTouched(): Boolean {
         carouselScrollView.clearOnScrollListeners()
         dailiesViewPager.addCustomOnPageSelectedListener(dailiesPageListener)
         return false
     }
 
-    @OnTouch(R.id.carousel_scrollview)
+    @OnTouch(R2.id.carousel_scrollview)
     fun onCarouselTouched(): Boolean {
         dailiesViewPager.clearCustomOnPageSelectedListeners()
         carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)

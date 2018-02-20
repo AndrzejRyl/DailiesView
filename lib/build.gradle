@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-android'
 apply plugin: "com.jfrog.artifactory"
 apply plugin: 'maven-publish'
@@ -8,10 +9,13 @@ ext.VERSION_NAME = "1.0." + VERSION_CODE
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.12"
+        classpath "com.jakewharton:butterknife-gradle-plugin:9.0.0-SNAPSHOT"
     }
 }
 
