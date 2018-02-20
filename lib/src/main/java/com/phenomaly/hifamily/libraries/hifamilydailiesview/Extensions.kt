@@ -8,6 +8,8 @@ import android.view.WindowManager
 
 internal fun View.getColor(id: Int): Int = ContextCompat.getColor(context, id)
 
+internal fun View.getDimension(id: Int): Float = context.resources.getDimension(id)
+
 internal fun View.hide() {
     visibility = View.GONE
 }
