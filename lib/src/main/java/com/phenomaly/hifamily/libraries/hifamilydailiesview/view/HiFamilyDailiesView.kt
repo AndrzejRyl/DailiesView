@@ -140,10 +140,7 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         )
 
         carouselScrollView.adapter = carouselAdapter
-        carouselOnScrolledListener = { position ->
-            dailySelectedListeners.forEach { it.invoke(position) }
-            dailiesViewPager.setCurrentItem(position, false)
-        }
+        carouselOnScrolledListener = { dailiesViewPager.setCurrentItem(it, false) }
         carouselScrollView.addCustomScrollListener(carouselOnScrolledListener)
     }
 
