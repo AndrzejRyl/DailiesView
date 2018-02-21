@@ -166,6 +166,3 @@ $RECYCLE.BIN/
 
 # Fabric
 app/fabric.properties
-
-# Testing app 
-testapp/
