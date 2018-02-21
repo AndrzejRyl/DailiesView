@@ -107,6 +107,13 @@ class HiFamilyDailiesView @JvmOverloads constructor(
         onTouchListeners.clear()
     }
 
+    fun scrollToPosition(index: Int) {
+        when (currentDailyElement) {
+            DailyElement.DAILIES -> dailiesViewPager.setCurrentItem(index, true)
+            DailyElement.CAROUSEL -> carouselScrollView.smoothScrollToPosition(index)
+        }
+    }
+
     private fun initDailiesAdapter(availableDailies: Map<String, String>) {
         dailiesAdapter = DailiesAdapter(
                 context,
